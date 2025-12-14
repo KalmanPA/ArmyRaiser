@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "DragDropMouse",
+    "maps": [
+        {
+            "name": "DragDrop",
+            "id": "950266ff-93ec-470c-84f9-8ef1c82ed297",
+            "actions": [
+                {
+                    "name": "Tracking",
+                    "type": "Value",
+                    "id": "7c26566e-ad43-40cc-97e5-fb499c2b9039",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Clicking",
+                    "type": "Button",
+                    "id": "4e3bafdd-30b6-4e9a-b660-7481477eeeea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ffc19a78-dbf0-421f-af82-fb57c5d9ba49",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tracking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d51d6bd-9ca4-4320-b990-6be06e80ee66",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clicking",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
