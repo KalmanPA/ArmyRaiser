@@ -11,12 +11,13 @@ public class Hand : MonoBehaviour
     [SerializeField] private Transform _cardDrawSpawnPosition;
 
     [SerializeField] private float _handWidth = 20;
-    [SerializeField] private float _distanceBetweenCards = 2.5f;
+    [SerializeField] private float _distanceBetweenCards = 2.6f;
 
     private void Start()
     {
         Debug.Log("HandStart");
 
+        DrawCard();
         DrawCard();
         DrawCard();
         DrawCard();
@@ -52,7 +53,7 @@ public class Hand : MonoBehaviour
             // Optional clamp to hand width
             offset = Mathf.Clamp(offset, -_handWidth * 0.5f, _handWidth * 0.5f);
 
-            Vector3 position = new Vector3(offset, 0f, 0f);
+            Vector3 position = new Vector3(offset + gameObject.transform.position.x, gameObject.transform.position.y, 0f);
 
             // Assign to card
             _cardsInHand[i].GetComponent<CardMovement>().AssignHandPosititon(position);
