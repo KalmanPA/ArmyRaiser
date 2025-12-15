@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868716827366419547, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8787940522139516688, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: pressAction
@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5940433012921826888, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.27
+      value: 3.47
       objectReference: {fileID: 0}
     - target: {fileID: 5940433012921826888, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_LocalPosition.y
@@ -598,7 +598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868716827366419547, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8787940522139516688, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: pressAction
@@ -2055,7 +2055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868716827366419547, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8787940522139516688, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: pressAction
@@ -2140,7 +2140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868716827366419547, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8787940522139516688, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: pressAction
@@ -4392,7 +4392,7 @@ Transform:
   m_GameObject: {fileID: 2053488642}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.6, z: 0}
+  m_LocalPosition: {x: 0, y: -3.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4415,7 +4415,7 @@ MonoBehaviour:
   _testCard: {fileID: 6868716827366419547, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
   _cardDrawSpawnPosition: {fileID: 1252040474}
   _handWidth: 20
-  _distanceBetweenCards: 2
+  _distanceBetweenCards: 1.55
 --- !u!61 &2053488645
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4603,7 +4603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6868716827366419547, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8787940522139516688, guid: 67455fcd5af21d74d96ac396abec1434, type: 3}
       propertyPath: pressAction

@@ -15,8 +15,8 @@ public class Hand : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("HandStart");
-
+        DrawCard();
+        DrawCard();
         DrawCard();
         DrawCard();
         DrawCard();
@@ -34,7 +34,46 @@ public class Hand : MonoBehaviour
     {
         _cardsInHand.Add(card);
 
+        card.GetComponent<CardMovement>().OnHovered += Hand_OnHovered;
+        card.GetComponent<CardMovement>().OnDrag += Hand_OnDrag;
+
         AdjustCardIndexesAndPositions();
+    }
+
+    private void Hand_OnDrag(bool enabled)
+    {
+        foreach (GameObject card in _cardsInHand)
+        {
+            card.GetComponent<CardMovement>().ToggleCardCollider(!enabled);
+        }
+    }
+
+    private void Hand_OnHovered(Vector3 hoverPosition)
+    {
+        CardMovement closestCard = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (GameObject card in _cardsInHand)
+        {
+            CardMovement cm = card.GetComponent<CardMovement>();
+            float dist = Vector3.Distance(card.transform.position, hoverPosition);
+
+            if (dist < closestDistance)
+            {
+                closestDistance = dist;
+                closestCard = cm;
+            }
+        }
+
+        foreach (GameObject card in _cardsInHand)
+        {
+            CardMovement cm = card.GetComponent<CardMovement>();
+
+            if (cm == closestCard)
+                cm.SelectCard();
+            else
+                cm.DeSelectCard();
+        }
     }
 
     private void AdjustCardIndexesAndPositions()

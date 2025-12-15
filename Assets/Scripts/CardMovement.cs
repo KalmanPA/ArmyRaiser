@@ -1,12 +1,21 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 {
+    public event Action<Vector3> OnHovered;
+
+    public event Action<bool> OnDrag;
+
+    public bool IsSelected = false;
+
+    //public bool IsAnotherCardSelected = false;
+
     DragDropMouse _input;
 
     Camera _cam;
-    bool _dragging;
+    bool _isBeingDragged;
     Vector3 _offset;
 
     [SerializeField] float _moveSpeed = 10f;
@@ -15,6 +24,8 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 
     public int HandIndex;
     public int TemporaryHandIndex;
+
+    private GameObject _displayCopy;
 
     void Awake()
     {
@@ -36,6 +47,13 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 
     public void AssignHandPosititon(Vector3 posInHand) { _posInHand = posInHand; }
 
+    public void ToggleCardCollider(bool enabled)
+    {
+        if (_isBeingDragged) return;
+        GetComponent<Collider2D>().enabled = enabled;
+        //IsAnotherCardSelected = !enabled;
+    }
+
     public void OnClicking(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
@@ -49,6 +67,39 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
         // This event fires constantly while moving the mouse
     }
 
+    public void SelectCard()
+    {
+        IsSelected = true;
+
+        if (_displayCopy == null)
+        {
+            _displayCopy = Instantiate(gameObject, transform.position, Quaternion.identity);
+
+            _displayCopy.GetComponent<CardMovement>().enabled = false;
+
+            _displayCopy.transform.position = new Vector3(transform.position.x, -3.2f, -3f);
+            _displayCopy.transform.localScale = Vector3.one;
+        }
+        //transform.localScale = Vector3.one;
+        //transform.position = new Vector3(transform.position.x, transform.position.y, -3f);
+    }
+
+    public void DeSelectCard()
+    {
+        IsSelected = false;
+
+        if (_displayCopy != null)
+        {
+            Destroy(_displayCopy.gameObject);
+        }
+        
+        //_isHoveredOver = false;
+        //OnHovered?.Invoke(false);
+
+        //transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        //transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+    }
+
     void StartDrag(InputAction.CallbackContext ctx)
     {
         Vector2 screenPos = _input.DragDrop.Tracking.ReadValue<Vector2>();
@@ -57,35 +108,82 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
         Collider2D col = GetComponent<Collider2D>();
         if (col != null && col.OverlapPoint(worldPos))
         {
-            _dragging = true;
-            _offset = transform.position - worldPos;
+            _isBeingDragged = true;
+            OnDrag?.Invoke(true);
+            _offset = worldPos;
         }
+
+        DeSelectCard();
     }
 
     void StopDrag(InputAction.CallbackContext ctx)
     {
-        _dragging = false;
+        OnDrag?.Invoke(false);
+        _isBeingDragged = false;
     }
 
     void Update()
     {
-        if (!_dragging)
-        {
-            if (_positionForCardToGoTo == Vector3.zero)
-                _positionForCardToGoTo = _posInHand;
+        MoveCard();
 
-            transform.position = Vector3.Lerp(
-                transform.position,
-                _positionForCardToGoTo,
-                Time.deltaTime * _moveSpeed
-            );
+        CheckIfSelected();
+    }
+
+    private void MoveCard()
+    {
+        //if (IsAnotherCardSelected) return;
+
+        if (!_isBeingDragged)
+        {
+            MoveCardToFixedPosition();
         }
         else
         {
+            DragCard();
+        }
+    }
+
+    private void CheckIfSelected()
+    {
+        if (Vector3.Distance(transform.position, _positionForCardToGoTo) < 0.1)
+        {
             Vector2 screenPos = _input.DragDrop.Tracking.ReadValue<Vector2>();
             Vector3 worldPos = ScreenToWorld(screenPos);
-            transform.position = worldPos + _offset;
+
+            Collider2D col = GetComponent<Collider2D>();
+            if (col != null && col.OverlapPoint(worldPos))
+            {
+                //_isHoveredOver = true;
+                OnHovered?.Invoke(worldPos);
+            }
+            else
+            {
+                DeSelectCard();
+            }
         }
+    }
+
+    private void MoveCardToFixedPosition()
+    {
+        if (_positionForCardToGoTo == Vector3.zero)
+            _positionForCardToGoTo = _posInHand;
+
+        transform.position = Vector3.Lerp(
+            transform.position,
+            _positionForCardToGoTo,
+            Time.deltaTime * _moveSpeed
+        );
+    }
+
+    private void DragCard()
+    {
+        if (!IsSelected) return;
+
+        //transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+        Vector2 screenPos = _input.DragDrop.Tracking.ReadValue<Vector2>();
+        Vector3 worldPos = ScreenToWorld(screenPos);
+        transform.position = worldPos/* + _offset*/;
     }
 
     Vector3 ScreenToWorld(Vector2 screenPos)
