@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 3458890187483926179}
   - component: {fileID: 8787940522139516688}
   - component: {fileID: 1928519627685120719}
+  - component: {fileID: 3086497767053810873}
   m_Layer: 0
   m_Name: Card_Base
   m_TagString: Untagged
@@ -856,6 +857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardMovement
   IsSelected: 0
+  BattleSiteToGoTo: {fileID: 0}
+  _unit: {fileID: 2390524379838337785, guid: a3997f2cbf6e1074d8905d59a8ff8c1a, type: 3}
   _moveSpeed: 9
   HandIndex: 0
   TemporaryHandIndex: 0
@@ -889,7 +892,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -905,6 +908,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5, y: 3.5}
   m_EdgeRadius: 0
+--- !u!50 &3086497767053810873
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868716827366419547}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7143129391516586087
 GameObject:
   m_ObjectHideFlags: 0

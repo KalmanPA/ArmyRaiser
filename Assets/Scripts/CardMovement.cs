@@ -8,7 +8,11 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 
     public event Action<bool> OnDrag;
 
-    public bool IsSelected = false;
+    [HideInInspector] public bool IsSelected = false;
+
+    [HideInInspector] public BattleSites BattleSiteToGoTo;
+
+    [SerializeField] private GameObject _unit;
 
     //public bool IsAnotherCardSelected = false;
 
@@ -46,6 +50,8 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
     }
 
     public void AssignHandPosititon(Vector3 posInHand) { _posInHand = posInHand; }
+
+    public void AssignPositionForCardToGo(Vector3 posToGoTo) { _positionForCardToGoTo = posToGoTo; }
 
     public void ToggleCardCollider(bool enabled)
     {
@@ -173,6 +179,16 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
             _positionForCardToGoTo,
             Time.deltaTime * _moveSpeed
         );
+
+        if (BattleSiteToGoTo != null)
+        {
+            if (Vector3.Distance(transform.position, _positionForCardToGoTo) < 0.1f)
+            {
+                BattleSiteToGoTo.SpawnUnit(_unit);
+                DeSelectCard();
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void DragCard()
@@ -193,7 +209,15 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
         return _cam.ScreenToWorldPoint(pos);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) { if (collision.TryGetComponent<ICardPlace>(out var cardPlace)) { Vector3 targetPos = cardPlace.CardEntered(); if (targetPos != null) { _positionForCardToGoTo = targetPos; } } }
-    private void OnTriggerExit2D(Collider2D collision) { if (collision.CompareTag("CardPlace")) { } }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{ 
+    //    if (collision.TryGetComponent<ICardPlace>(out var cardPlace)) { Vector3 targetPos = cardPlace.CardEntered();
+    //        if (targetPos != null) 
+    //        { 
+    //            _positionForCardToGoTo = targetPos;
+    //        }
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D collision) { if (collision.CompareTag("CardPlace")) { } }
 }
 

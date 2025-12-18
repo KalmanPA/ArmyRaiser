@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour
 {
+    [HideInInspector] public int Rank;
+    [HideInInspector] public GameObject UnitCard;
+
     private const int MIN_POWER = 0;
     private const int MAX_POWER = 99;
 
@@ -39,6 +42,11 @@ public abstract class UnitBase : MonoBehaviour
             return;
 
         Power -= amount;
+    }
+
+    public virtual void OnEnterBattleSite()
+    {
+        // Intentionally empty
     }
 
     public virtual void OnAttack()
