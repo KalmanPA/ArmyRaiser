@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8095097320283410640, guid: d73ae2bd1e4c37d4591ccf1fb0cab7ed, type: 3}
+  m_Sprite: {fileID: 2127337917502359782, guid: 7fcec99efce831b498d4177ccb3968e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8951354982428345478}
   - component: {fileID: 7291802027756818954}
   - component: {fileID: 3759693768551271207}
+  - component: {fileID: 3427772765339477212}
   m_Layer: 0
   m_Name: UnitBase
   m_TagString: Untagged
@@ -155,7 +156,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.3, y: 1.6}
+  m_Size: {x: 2.3, y: 1.16}
   m_EdgeRadius: 0
 --- !u!114 &3759693768551271207
 MonoBehaviour:
@@ -169,9 +170,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d09915055f36d94fad638ef9d7183ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenericUnit
+  IsLeavingCorpse: 0
   Rank: 0
-  UnitCard: {fileID: 0}
+  DisplayUnitCard: {fileID: 0}
   _power: 5
+--- !u!114 &3427772765339477212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390524379838337785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ffd1a95dba77b441ab6a225a7dc046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitVisual
+  _unitBase: {fileID: 3759693768551271207}
+  _unitBackgroundImage: {fileID: 8587336518864103504}
+  _unitImage: {fileID: 4831050653738504238}
+  _powerText: {fileID: 9206300101453822422}
 --- !u!1 &2457741817976132059
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,8 +392,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6b4c00a66fa4e904296c5db066d4962c, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -497,7 +515,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2.3, y: 1.6}
+  m_SizeDelta: {x: 2.3, y: 1.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1046882204247710537
 Canvas:

@@ -36,6 +36,7 @@ public class Hand : MonoBehaviour
 
         card.GetComponent<CardMovement>().OnHovered += Hand_OnHovered;
         card.GetComponent<CardMovement>().OnDrag += Hand_OnDrag;
+        card.GetComponent<CardMovement>().OnCardPlayed += CardPlayed;
 
         AdjustCardIndexesAndPositions();
     }
@@ -95,12 +96,18 @@ public class Hand : MonoBehaviour
             Vector3 position = new Vector3(offset + gameObject.transform.position.x, gameObject.transform.position.y, 0f);
 
             // Assign to card
-            _cardsInHand[i].GetComponent<CardMovement>().AssignHandPosititon(position);
+            _cardsInHand[i].GetComponent<CardMovement>().AssignHandPosition(position);
+            _cardsInHand[i].GetComponent<CardMovement>().AssignPositionForCardToGo(position);
         }
     }
 
-    public void CardPlayed()
+    public void CardPlayed(GameObject card)
     {
-        
+        card.GetComponent<CardMovement>().OnHovered -= Hand_OnHovered;
+        card.GetComponent<CardMovement>().OnDrag -= Hand_OnDrag;
+        card.GetComponent<CardMovement>().OnCardPlayed -= CardPlayed;
+
+        _cardsInHand.Remove(card);
+        AdjustCardIndexesAndPositions();
     }
 }

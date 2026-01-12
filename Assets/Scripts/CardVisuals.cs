@@ -9,7 +9,7 @@ public class CardVisuals : MonoBehaviour
     [Header("Image Targets")]
     [SerializeField] Image _border;
     [SerializeField] Image _unitBackground;
-    [SerializeField] Image _unit;
+    [SerializeField] Image _unitImage;
     [SerializeField] Image _powerBorder;
     [SerializeField] Image _nameContainer;
     [SerializeField] Image _narrativeContainer;
@@ -40,7 +40,7 @@ public class CardVisuals : MonoBehaviour
     {
         ApplyImage(_border, _borderSprite, "Border Sprite");
         ApplyImage(_unitBackground, _unitBackgroundSprite, "Unit Background Sprite");
-        ApplyImage(_unit, _unitSprite, "Unit Sprite");
+        ApplyImage(_unitImage, _unitSprite, "Unit Sprite");
         ApplyImage(_powerBorder, _powerBorderSprite, "Power Border Sprite");
         ApplyImage(_nameContainer, _nameContainerSprite, "Name Container Sprite");
         ApplyImage(_narrativeContainer, _narrativeContainerSprite, "Narrative Container Sprite");
@@ -49,6 +49,11 @@ public class CardVisuals : MonoBehaviour
         ApplyText(_nameText, _name, "Name Text");
         ApplyText(_abilityText, _ability, "Ability Text");
         ApplyText(_narrativeText, _narrative, "Narrative Text");
+    }
+
+    public (Sprite unitBackgroundImage, Sprite uniteImage, int power) GetDataForUnit()
+    {
+        return (_unitBackgroundSprite, _unitSprite, _power);
     }
 
     void OnValidate()

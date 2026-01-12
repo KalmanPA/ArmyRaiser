@@ -430,7 +430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In Second row '
+  m_text: 'Does nothing special for now. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardBase
   _border: {fileID: 8164595261745219460}
   _unitBackground: {fileID: 6275370313817655766}
-  _unit: {fileID: 4421583379497170683}
+  _unitImage: {fileID: 4421583379497170683}
   _powerBorder: {fileID: 7521855128244480375}
   _nameContainer: {fileID: 7225544893596680739}
   _narrativeContainer: {fileID: 8850181029135101212}
@@ -836,13 +836,13 @@ MonoBehaviour:
   _narrativeText: {fileID: 2629937614247734806}
   _borderSprite: {fileID: 2127337917502359782, guid: 7fcec99efce831b498d4177ccb3968e8, type: 3}
   _unitBackgroundSprite: {fileID: 8095097320283410640, guid: d73ae2bd1e4c37d4591ccf1fb0cab7ed, type: 3}
-  _unitSprite: {fileID: 0}
+  _unitSprite: {fileID: 21300000, guid: 6b4c00a66fa4e904296c5db066d4962c, type: 3}
   _powerBorderSprite: {fileID: 0}
   _nameContainerSprite: {fileID: 0}
   _narrativeContainerSprite: {fileID: 0}
   _power: 5
   _name: Wandering Wizard
-  _ability: 'In Second row '
+  _ability: 'Does nothing special for now. '
   _narrative: You shall pass, AWAY!
 --- !u!114 &8787940522139516688
 MonoBehaviour:
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardMovement
   IsSelected: 0
   BattleSiteToGoTo: {fileID: 0}
-  _unit: {fileID: 2390524379838337785, guid: a3997f2cbf6e1074d8905d59a8ff8c1a, type: 3}
+  Unit: {fileID: 2390524379838337785, guid: a3997f2cbf6e1074d8905d59a8ff8c1a, type: 3}
   _moveSpeed: 9
   HandIndex: 0
   TemporaryHandIndex: 0

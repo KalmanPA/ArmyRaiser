@@ -8,13 +8,13 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 
     public event Action<bool> OnDrag;
 
+    public event Action<GameObject> OnCardPlayed;
+
     [HideInInspector] public bool IsSelected = false;
 
     [HideInInspector] public BattleSites BattleSiteToGoTo;
 
-    [SerializeField] private GameObject _unit;
-
-    //public bool IsAnotherCardSelected = false;
+    public GameObject Unit;
 
     DragDropMouse _input;
 
@@ -24,7 +24,7 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 
     [SerializeField] float _moveSpeed = 10f;
     Vector3 _positionForCardToGoTo;
-    Vector3 _posInHand;
+    Vector3 _handPos;
 
     public int HandIndex;
     public int TemporaryHandIndex;
@@ -49,9 +49,25 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
         _input.Disable();
     }
 
-    public void AssignHandPosititon(Vector3 posInHand) { _posInHand = posInHand; }
+    public bool IsBeingDragged() { return _isBeingDragged; }
 
-    public void AssignPositionForCardToGo(Vector3 posToGoTo) { _positionForCardToGoTo = posToGoTo; }
+    public void AssignHandPosition(Vector3 pos)
+    {
+        _handPos = pos;
+    }
+
+    public void AssignPositionForCardToGo(Vector3 posToGoTo)
+    {
+       
+        if (posToGoTo == Vector3.zero)
+        {
+            _positionForCardToGoTo = _handPos;
+        }
+        else
+        {
+            _positionForCardToGoTo = posToGoTo;
+        }
+    }
 
     public void ToggleCardCollider(bool enabled)
     {
@@ -171,8 +187,8 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
 
     private void MoveCardToFixedPosition()
     {
-        if (_positionForCardToGoTo == Vector3.zero)
-            _positionForCardToGoTo = _posInHand;
+        //if (_positionForCardToGoTo == Vector3.zero)
+        //    _positionForCardToGoTo = _posInHand;
 
         transform.position = Vector3.Lerp(
             transform.position,
@@ -184,9 +200,10 @@ public class CardMovement : MonoBehaviour,DragDropMouse.IDragDropActions
         {
             if (Vector3.Distance(transform.position, _positionForCardToGoTo) < 0.1f)
             {
-                BattleSiteToGoTo.SpawnUnit(_unit);
+                BattleSiteToGoTo.SpawnUnit(Unit, gameObject);
                 DeSelectCard();
                 Destroy(gameObject);
+                OnCardPlayed?.Invoke(gameObject);
             }
         }
     }
